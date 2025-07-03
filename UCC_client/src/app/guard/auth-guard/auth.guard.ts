@@ -10,7 +10,6 @@ export class AuthGuard implements CanActivate {
     constructor(private userService: UserService, private cookieService: CookieServices, private router: Router) {}
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        // Check if there is a user_token in the cookies
         const isLoggedIn = this.cookieService.getCookie('user_token');
 
         if (next.routeConfig?.path === 'home' && isLoggedIn) {
@@ -21,7 +20,6 @@ export class AuthGuard implements CanActivate {
             return false;
         }
 
-        // Allow access if none of the conditions above are met
         return true;
     }
 }
