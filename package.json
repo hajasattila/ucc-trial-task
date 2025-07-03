@@ -1,0 +1,16 @@
+{
+	"name": "secret-server-project",
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "concurrently \"npm start --prefix UCC_client\" \"npm run develop --prefix UCC_server\""
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.20",
+		"concurrently": "^8.2.2",
+		"postcss": "^8.4.41",
+		"tailwindcss": "^3.4.10"
+	},
+	"dependencies": {
+		"mysql": "^2.18.1"
+	}
+}
