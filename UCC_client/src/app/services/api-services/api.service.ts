@@ -24,6 +24,7 @@ export class ApiService {
             },
             error: (err) => {
                 this.notify.error('Login Failed');
+                console.log(err)
             },
         });
     }

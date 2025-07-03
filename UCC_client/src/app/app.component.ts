@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from './services/user-services/user.service';
 import { CookieServices } from './services/cookie-services/cookie.service';
 import { ApiService } from './services/api-services/api.service';
-import { config } from './../config';
+import { config } from '../config';
 
 @Component({
   selector: 'app-root',
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.sUser.addUser(res);
   }
 
-  private cb_userLoadedFailed(err: any): void {
+  private cb_userLoadedFailed(): void {
     this.sCooki.deleteCookie('user_token');
     this.sUser.removeUser();
     this.router.navigate(['/']);
