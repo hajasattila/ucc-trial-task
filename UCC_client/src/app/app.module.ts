@@ -27,7 +27,7 @@ import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wr
 import { FormInputComponent } from './components/shared/form-input/form-input.component';
 import { ConfirmDeleteModalComponent } from './components/shared/confirm-delete-modal/confirm-delete-modal.component';
 import { ToastMessageComponent } from './components/shared/toast-message/toast-message.component';
-import {RouterModule, RouterOutlet} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import { LoginPageComponent } from './pages/auth/login-page/login-page.component';
 import {CommonModule} from "@angular/common";
 

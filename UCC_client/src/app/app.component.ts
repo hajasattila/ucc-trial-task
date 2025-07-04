@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {UserService} from './services/user-services/user.service';
 import {CookieServices} from './services/cookie-services/cookie.service';
 import {ApiService} from './services/api-services/api.service';
