@@ -4,7 +4,9 @@
     "email": "Email",
     "password": "Password",
     "forgotPassword": "Forgot your password?",
-    "submit": "Login"
+    "submit": "Login",
+    "success": "Login successful!",
+    "failed": "Login failed, please try again!"
   },
   "events": {
     "title": "Your Events",
@@ -23,11 +25,14 @@
     "cancel": "Cancel"
   },
   "NAV": {
+    "LOGIN": "Login",
     "TASKS": "Tasks",
     "LOGOUT": "Logout",
     "LANG_HU": "Hungarian",
     "LANG_EN": "English",
-    "HOME": "Home"
+    "HOME": "Home",
+    "EVENTS": "Events"
+
   },
   "PAGE": {
     "NOT_FOUND_TITLE": "Page Not Found",

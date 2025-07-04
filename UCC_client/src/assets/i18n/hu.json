@@ -4,7 +4,9 @@
     "email": "Email",
     "password": "Jelszó",
     "forgotPassword": "Elfelejtetted a jelszavad?",
-    "submit": "Bejelentkezés"
+    "submit": "Bejelentkezés",
+    "success": "Sikeres bejelentkezés!",
+    "failed": "Sikertelen bejelentkezés, próbáld újra!"
   },
   "events": {
     "title": "Saját eseményeid",
@@ -23,11 +25,13 @@
     "cancel": "Mégse"
   },
   "NAV": {
+    "LOGIN": "Bejelentkezés",
     "TASKS": "Feladatok",
     "LOGOUT": "Kijelentkezés",
     "LANG_HU": "Magyar",
     "LANG_EN": "Angol",
-    "HOME": "Kezdőlap"
+    "HOME": "Kezdőlap",
+    "EVENTS": "Események"
   },
   "PAGE": {
     "NOT_FOUND_TITLE": "Az oldal nem található",

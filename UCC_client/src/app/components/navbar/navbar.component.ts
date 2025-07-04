@@ -42,10 +42,10 @@ export class NavbarComponent implements OnInit {
   }
 
   protected logout(): void {
-    this.sApi.logout();
-    this.isLoggedIn = false;
+    this.sUser.logout();
     this.router.navigate(['/login']);
   }
+
 
   protected switchLang(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;

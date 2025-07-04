@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["node", "@strapi/types"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "lib": ["ES2020"],

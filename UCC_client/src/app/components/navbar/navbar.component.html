@@ -4,41 +4,39 @@
     <a class="flex items-center text-indigo cursor-pointer z-50" routerLink="">
       <img src="assets/imgs/UCCLOGO.png" alt="Site Logo" class="w-12 h-auto mr-4"/>
       <span
-        class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo to-purple"> Project Task</span>
+        class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo to-purple">
+        Project Task
+      </span>
     </a>
 
     <div class="hidden lg:flex lg:items-center lg:justify-center lg:flex-grow">
       <ul class="list-style-none flex flex-row items-center">
-        <ng-container *ngFor="let item of menuItems">
-          <li class="mx-2">
-            <a
-              [routerLink]="item.link"
-              routerLinkActive="active"
-              [ngClass]="{
-                                'text-indigo': activeUrl === item.link,
-                                'text-gray800': activeUrl !== item.link
-                            }"
-              class="text-lg transition duration-300 ease-in-out transform hover:text-lightGreen hover:scale-110"
-            >
-              {{ item.label | translate }}
-            </a>
-          </li>
-        </ng-container>
-
         <li *ngIf="isLoggedIn" class="mx-2">
           <a
-            [routerLink]="'/todo'"
+            [routerLink]="'/events'"
             routerLinkActive="active"
             [ngClass]="{
-                            'text-indigo': activeUrl === '/todo',
-                            'text-gray800': activeUrl !== '/todo'
-                        }"
+              'text-indigo': activeUrl === '/events',
+              'text-gray800': activeUrl !== '/events'
+            }"
             class="text-lg transition duration-300 ease-in-out transform hover:text-lightGreen hover:scale-110"
           >
-            {{ 'NAV.TASKS' | translate }}
+            {{ 'NAV.EVENTS' | translate }}
           </a>
         </li>
-
+        <li *ngIf="!isLoggedIn" class="mx-2">
+          <a
+            [routerLink]="'/login'"
+            routerLinkActive="active"
+            [ngClass]="{
+              'text-indigo': activeUrl === '/login',
+              'text-gray800': activeUrl !== '/login'
+            }"
+            class="text-lg transition duration-300 ease-in-out transform hover:text-lightGreen hover:scale-110"
+          >
+            {{ 'NAV.LOGIN' | translate }}
+          </a>
+        </li>
         <li *ngIf="isLoggedIn" class="mx-2">
           <button (click)="logout()"
                   class="hover:text-lightGreen bg-gradient-to-r from-indigo to-purple text-white font-semibold rounded-full py-2 px-6 transition duration-300 ease-in-out transform hover:bg-blue-700">
@@ -72,39 +70,34 @@
     <div [ngClass]="menuOpen ? 'flex animate-menu-expand text-indigo' : 'animate-menu-collapse text-gray800'"
          class="bg-transparent lg:hidden flex-col items-center w-full lg:w-auto overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
       <ul class="list-style-none flex flex-col items-center w-full lg:w-auto">
-        <ng-container *ngFor="let item of menuItems">
-          <li class="bg-transparent mb-4 w-full text-center">
-            <a
-              (click)="toggleMenu()"
-              [routerLink]="item.link"
-              routerLinkActive="active"
-              [ngClass]="activeUrl === item.link ? 'text-indigo' : 'hover:text-lightGreen'"
-              class="bg-transparent text-lg block w-full transition duration-300 ease-in-out transform hover:scale-105"
-            >
-              {{ item.label | translate }}
-            </a>
-          </li>
-        </ng-container>
-
         <li *ngIf="isLoggedIn" class="bg-transparent mb-4 w-full text-center">
           <a
             (click)="toggleMenu()"
-            [routerLink]="'/todo'"
+            [routerLink]="'/events'"
             routerLinkActive="active"
-            [ngClass]="activeUrl === '' ? 'text-indigo' : 'hover:text-lightGreen'"
+            [ngClass]="activeUrl === '/events' ? 'text-indigo' : 'hover:text-lightGreen'"
             class="bg-transparent text-lg block w-full transition duration-300 ease-in-out transform hover:scale-105"
           >
-            {{ 'NAV.TASKS' | translate }}
+            {{ 'NAV.EVENTS' | translate }}
           </a>
         </li>
-
+        <li *ngIf="!isLoggedIn" class="bg-transparent mb-4 w-full text-center">
+          <a
+            (click)="toggleMenu()"
+            [routerLink]="'/login'"
+            routerLinkActive="active"
+            [ngClass]="activeUrl === '/login' ? 'text-indigo' : 'hover:text-lightGreen'"
+            class="bg-transparent text-lg block w-full transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            {{ 'NAV.LOGIN' | translate }}
+          </a>
+        </li>
         <li *ngIf="isLoggedIn" class="bg-transparent mb-4 w-full text-center">
           <button (click)="logout()"
                   class="bg-gradient-to-r from-indigo to-purple text-white font-semibold rounded-full py-2 px-6 transition duration-300 ease-in-out transform hover:bg-blue-700">
             {{ 'NAV.LOGOUT' | translate }}
           </button>
         </li>
-
         <li class="mt-4">
           <select [(ngModel)]="currentLang" class="bg-white border-2 border-indigo p-2 rounded"
                   (change)="switchLang($event)">

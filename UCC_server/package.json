@@ -17,6 +17,7 @@
   "dependencies": {
     "@strapi/plugin-cloud": "5.17.0",
     "@strapi/plugin-users-permissions": "5.17.0",
+    "@strapi/provider-email-nodemailer": "^5.17.0",
     "@strapi/strapi": "5.17.0",
     "better-sqlite3": "11.3.0",
     "react": "^18.0.0",
@@ -35,7 +36,7 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "a46aae40-a428-40d3-9dbb-f67a552b3e6a",
-    "installId": "5f6f4cfc06aea9d953055cf66e8ea14193043af0097a2fff77590df949772163"
+    "uuid": "c88dbbce-0c46-461f-849f-3d12186f3507",
+    "installId": "a241148834c02718f9f7c5c53a3bc538c3ebe36667f84bd13bcb598265ee2972"
   }
 }
