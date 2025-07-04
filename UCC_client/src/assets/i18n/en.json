@@ -1,0 +1,37 @@
+{
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "submit": "Login"
+  },
+  "events": {
+    "title": "Your Events",
+    "new": "+ New Event",
+    "empty": "You don't have any events yet.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "noDescription": "No description",
+    "createTitle": "Create New Event",
+    "titleLabel": "Title",
+    "dateLabel": "Date",
+    "descriptionLabel": "Description (optional)",
+    "createButton": "Create"
+  },
+  "common": {
+    "cancel": "Cancel"
+  },
+  "NAV": {
+    "TASKS": "Tasks",
+    "LOGOUT": "Logout",
+    "LANG_HU": "Hungarian",
+    "LANG_EN": "English",
+    "HOME": "Home"
+  },
+  "PAGE": {
+    "NOT_FOUND_TITLE": "Az oldal nem található",
+    "NOT_FOUND_DESCRIPTION": "Sajnáljuk, a keresett oldal nem létezik vagy áthelyezésre került.",
+    "BACK_TO_HOME": "Vissza a főoldalra"
+  }
+}

@@ -1,11 +1,13 @@
-import { TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {TranslateLoader} from '@ngx-translate/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export class TranslateHttpLoader implements TranslateLoader {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private prefix: string = './assets/i18n/', private suffix: string = '.json') {
+  }
 
   public getTranslation(lang: string): Observable<any> {
-    return this.http.get(`/assets/translate/${lang}.json`);
+    return this.http.get(`${this.prefix}${lang}${this.suffix}`);
   }
+
 }

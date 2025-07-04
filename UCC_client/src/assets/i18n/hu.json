@@ -1,0 +1,37 @@
+{
+  "login": {
+    "title": "Bejelentkezés",
+    "email": "Email",
+    "password": "Jelszó",
+    "forgotPassword": "Elfelejtetted a jelszavad?",
+    "submit": "Bejelentkezés"
+  },
+  "events": {
+    "title": "Saját eseményeid",
+    "new": "+ Új esemény",
+    "empty": "Nincs még eseményed.",
+    "edit": "Szerkesztés",
+    "delete": "Törlés",
+    "noDescription": "Nincs leírás",
+    "createTitle": "Új esemény létrehozása",
+    "titleLabel": "Cím",
+    "dateLabel": "Időpont",
+    "descriptionLabel": "Leírás (opcionális)",
+    "createButton": "Létrehozás"
+  },
+  "common": {
+    "cancel": "Mégse"
+  },
+  "NAV": {
+    "TASKS": "Feladatok",
+    "LOGOUT": "Kijelentkezés",
+    "LANG_HU": "Magyar",
+    "LANG_EN": "Angol",
+    "HOME": "Kezdőlap"
+  },
+  "PAGE": {
+    "NOT_FOUND_TITLE": "Page Not Found",
+    "NOT_FOUND_DESCRIPTION": "Sorry, the page you’re looking for doesn’t exist or has been moved.",
+    "BACK_TO_HOME": "Back to Homepage"
+  }
+}

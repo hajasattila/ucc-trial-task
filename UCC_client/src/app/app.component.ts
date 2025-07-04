@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { UserService } from './services/user-services/user.service';
-import { CookieServices } from './services/cookie-services/cookie.service';
-import { ApiService } from './services/api-services/api.service';
-import { config } from '../config';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {UserService} from './services/user-services/user.service';
+import {CookieServices} from './services/cookie-services/cookie.service';
+import {ApiService} from './services/api-services/api.service';
+import {config} from '../config';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,36 +12,23 @@ import { config } from '../config';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  showProfileModal = false;
 
   constructor(
     private router: Router,
     private sApi: ApiService,
     private sUser: UserService,
-    private sCooki: CookieServices
+    private sCooki: CookieServices,
+    private translate: TranslateService
   ) {
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        /*window.scroll({
-                    top: 0,
-                    left: 0,
-                    behavior: 'smooth',
-                });*/
-      }
-    });
+
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
   }
 
   ngOnInit(): void {
     document.title = config.SITENAME;
-
     this.initializeUser();
-    /*         this.checkOrientation();
-        window.addEventListener('resize', this.checkOrientation); */
   }
-
-  /*     ngOnDestroy(): void {
-        window.removeEventListener('resize', this.checkOrientation);
-    } */
 
   private initializeUser(): void {
     if (this.sCooki.getCookie('user_token')) {
@@ -61,19 +49,4 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  protected closeProfileModal(): void {
-    this.showProfileModal = false;
-  }
-
-  //Telefon el van-e fordítva
-  /*     private checkOrientation = () => {
-        const orientationMessage = document.getElementById('orientation-message');
-        if (orientationMessage) {
-            if (window.innerHeight > window.innerWidth) {
-                orientationMessage.style.display = 'flex';
-            } else {
-                orientationMessage.style.display = 'none';
-            }
-        }
-    }; */
 }

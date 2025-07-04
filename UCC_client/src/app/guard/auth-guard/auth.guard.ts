@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UserService } from '../../services/user-services/user.service';
-import { CookieServices } from '../../services/cookie-services/cookie.service'; // Make sure to import CookieServices
+import { CookieServices } from '../../services/cookie-services/cookie.service';
 
 @Injectable({
     providedIn: 'root',

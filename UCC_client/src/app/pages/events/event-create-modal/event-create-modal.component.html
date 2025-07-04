@@ -1,1 +1,29 @@
-<p>event-create-modal works!</p>
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded p-6 w-full max-w-md shadow-lg">
+    <h2 class="text-xl font-bold mb-4">{{ 'events.createTitle' | translate }}</h2>
+
+    <form (ngSubmit)="createEvent()" [formGroup]="form" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium">{{ 'events.titleLabel' | translate }}</label>
+        <input type="text" formControlName="title" class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium">{{ 'events.dateLabel' | translate }}</label>
+        <input type="datetime-local" formControlName="occurrence" class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium">{{ 'events.descriptionLabel' | translate }}</label>
+        <textarea formControlName="description" class="w-full border rounded px-3 py-2"></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button type="button" (click)="close()" class="text-gray-500">{{ 'common.cancel' | translate }}</button>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+          {{ 'events.createButton' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

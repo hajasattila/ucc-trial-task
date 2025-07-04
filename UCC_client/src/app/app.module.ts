@@ -10,11 +10,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AuthInterceptorService } from './interceptors/auth-interceptor/auth-interceptor.service';
 import { TranslateHttpLoader } from './pipes/translate-http-loader';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { LoginPageComponent } from './pages/auth/login-page.component';
 import { PasswordResetPageComponent } from './pages/auth/password-reset-page/password-reset-page.component';
 import { PasswordResetRequestModalComponent } from './pages/auth/password-reset-request-modal/password-reset-request-modal.component';
 import { EventListPageComponent } from './pages/events/event-list-page/event-list-page.component';
@@ -29,10 +27,12 @@ import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wr
 import { FormInputComponent } from './components/shared/form-input/form-input.component';
 import { ConfirmDeleteModalComponent } from './components/shared/confirm-delete-modal/confirm-delete-modal.component';
 import { ToastMessageComponent } from './components/shared/toast-message/toast-message.component';
-
+import {RouterModule, RouterOutlet} from '@angular/router';
+import { LoginPageComponent } from './pages/auth/login-page/login-page.component';
+import {CommonModule} from "@angular/common";
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -59,6 +59,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastMessageComponent
   ],
   imports: [
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
@@ -66,6 +70,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-left',
@@ -77,9 +82,14 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),
+    })
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
-  bootstrap: [AppComponent],
+  exports: [
+    TranslateModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
