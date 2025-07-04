@@ -1,1 +1,21 @@
-<p>event-edit-modal works!</p>
+<div class="fixed inset-0 bg-gray800 bg-opacity-60 flex items-center justify-center z-50">
+  <div class="bg-white rounded p-6 w-full max-w-md shadow-lg">
+    <h2 class="text-xl font-bold mb-4 text-purple">{{ 'events.editTitle' | translate }}</h2>
+
+    <form (ngSubmit)="editEvent()" [formGroup]="form" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray800">{{ 'events.descriptionLabel' | translate }}</label>
+        <textarea formControlName="description" rows="4" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal"></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button type="button" (click)="close()" class="text-gray800 hover:underline">
+          {{ 'common.cancel' | translate }}
+        </button>
+        <button type="submit" class="bg-indigo text-white px-4 py-2 rounded hover:bg-purple transition">
+          {{ 'events.saveButton' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

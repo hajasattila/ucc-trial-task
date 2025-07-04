@@ -30,8 +30,17 @@
     "HOME": "Home"
   },
   "PAGE": {
-    "NOT_FOUND_TITLE": "Az oldal nem található",
-    "NOT_FOUND_DESCRIPTION": "Sajnáljuk, a keresett oldal nem létezik vagy áthelyezésre került.",
-    "BACK_TO_HOME": "Vissza a főoldalra"
+    "NOT_FOUND_TITLE": "Page Not Found",
+    "NOT_FOUND_DESCRIPTION": "Sorry, the page you’re looking for doesn’t exist or has been moved.",
+    "BACK_TO_HOME": "Back to Homepage"
+  },
+  "reset": {
+    "title": "Reset password",
+    "email": "Email address",
+    "invalidEmail": "Please enter a valid email.",
+    "send": "Send reset link",
+    "cancel": "Cancel",
+    "success": "Reset email sent successfully!",
+    "failed": "Something went wrong. Please try again."
   }
 }

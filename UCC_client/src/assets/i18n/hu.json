@@ -30,8 +30,19 @@
     "HOME": "Kezdőlap"
   },
   "PAGE": {
-    "NOT_FOUND_TITLE": "Page Not Found",
-    "NOT_FOUND_DESCRIPTION": "Sorry, the page you’re looking for doesn’t exist or has been moved.",
-    "BACK_TO_HOME": "Back to Homepage"
+    "NOT_FOUND_TITLE": "Az oldal nem található",
+    "NOT_FOUND_DESCRIPTION": "Sajnáljuk, a keresett oldal nem létezik vagy áthelyezésre került.",
+    "BACK_TO_HOME": "Vissza a főoldalra"
+  },
+  "resetPage": {
+    "title": "Új jelszó beállítása",
+    "code": "Ellenőrző kód",
+    "newPassword": "Új jelszó",
+    "confirmPassword": "Jelszó megerősítése",
+    "submit": "Jelszó módosítása",
+    "invalid": "Kérlek, tölts ki minden mezőt helyesen!",
+    "mismatch": "A jelszavak nem egyeznek!",
+    "success": "Sikeres jelszócsere.",
+    "failed": "A jelszó visszaállítás nem sikerült."
   }
 }

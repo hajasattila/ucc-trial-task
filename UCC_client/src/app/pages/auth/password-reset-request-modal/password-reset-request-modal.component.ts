@@ -1,10 +1,40 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { UserService } from '../../../services/user-services/user.service';
+import {ModalService} from "../../../components/modal/modal.service";
 
 @Component({
   selector: 'app-password-reset-request-modal',
   templateUrl: './password-reset-request-modal.component.html',
-  styleUrl: './password-reset-request-modal.component.css'
 })
 export class PasswordResetRequestModalComponent {
+  form: FormGroup;
+  submitted = false;
+  success: boolean | null = null;
 
+  constructor(
+    private fb: FormBuilder,
+    private modalService: ModalService,
+    private userService: UserService
+  ) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
+
+  submit() {
+    this.submitted = true;
+    if (this.form.invalid) return;
+
+    const { email } = this.form.value;
+    // this.userService.requestPasswordReset(email).subscribe({
+    //   next: () => (this.success = true),
+    //   error: () => (this.success = false),
+    // });
+  }
+
+  close() {
+    this.modalService.close();
+  }
 }
