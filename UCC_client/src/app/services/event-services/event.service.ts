@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Event, CreateEventDto, UpdateEventDto } from '../../interfaces/event.model';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { config } from '../../../config';
-import { UserService } from '../user-services/user.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Event, CreateEventDto, UpdateEventDto} from '../../interfaces/event.model';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {config} from '../../../config';
+import {UserService} from '../user-services/user.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class EventService {
   private eventsSubject = new BehaviorSubject<Event[]>([]);
   public events$ = this.eventsSubject.asObservable();
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService) {
+  }
 
   private getAuthHeaders(): HttpHeaders {
     const token = this.userService.token;
@@ -26,7 +27,7 @@ export class EventService {
 
     return this.http.get<any>(
       `${config.STRAPI}/api/event?filters[user][id][$eq]=${userId}&populate=user`,
-      { headers: this.getAuthHeaders() }
+      {headers: this.getAuthHeaders()}
     ).pipe(
       tap((response) => {
         console.log('Strapi fetchUserEvents RAW response:', response);
@@ -54,8 +55,8 @@ export class EventService {
   createEvent(dto: CreateEventDto): Observable<Event> {
     return this.http.post<Event>(
       `${config.STRAPI}/api/event`,
-      { data: dto },
-      { headers: this.getAuthHeaders() }
+      {data: dto},
+      {headers: this.getAuthHeaders()}
     ).pipe(
       tap(() => {
         this.refreshEvents();
@@ -66,9 +67,9 @@ export class EventService {
 
   updateEvent(id: number, dto: UpdateEventDto): Observable<Event> {
     return this.http.put<Event>(
-      `${config.STRAPI}/api/events/${id}`,
-      { data: dto },
-      { headers: this.getAuthHeaders() }
+      `${config.STRAPI}/api/event/${id}`,
+      {data: dto},
+      {headers: this.getAuthHeaders()}
     ).pipe(
       tap(() => {
         this.refreshEvents();
@@ -76,16 +77,18 @@ export class EventService {
     );
   }
 
-  deleteEvent(id: number): Observable<void> {
-    return this.http.delete<void>(
-      `${config.STRAPI}/api/events/${id}`,
-      { headers: this.getAuthHeaders() }
+  deleteEvent(id: number): Observable<any> {
+    return this.http.delete<any>(
+      `${config.STRAPI}/api/event/${id}`,
+      {headers: this.getAuthHeaders()}
     ).pipe(
-      tap(() => {
+      tap((res) => {
+        console.log('Törlés válasz:', res);
         this.refreshEvents();
       })
     );
   }
+
 
   refreshEvents(): void {
     this.fetchUserEvents().subscribe();

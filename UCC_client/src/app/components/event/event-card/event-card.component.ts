@@ -21,11 +21,15 @@ export class EventCardComponent {
   deleteEvent() {
     if (confirm('Biztosan törlöd ezt az eseményt?')) {
       this.eventService.deleteEvent(this.event.id).subscribe({
-        next: () => this.deleted.emit(),
+        next: () => {
+          console.log('Törlés megtörtént, frissítés következik');
+          this.deleted.emit(); // ez már meghívja a frissítést a parentben
+        },
         error: (err) => console.error('Törlés hiba:', err)
       });
     }
   }
+
 
   openEditModal() {
     this.modalService.open('event-edit', this.event);
