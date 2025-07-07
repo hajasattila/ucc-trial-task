@@ -12,7 +12,7 @@ export class UserService {
   private userSubject = new BehaviorSubject<DecodedToken | null>(null);
   public user$ = this.userSubject.asObservable();
 
-  public user: any = null; // ne DecodedToken, hanem any vagy User!
+  public user: any = null;
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('token');

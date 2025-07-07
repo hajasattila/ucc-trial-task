@@ -15,24 +15,28 @@ export class EventService {
 
   private getAuthHeaders(): HttpHeaders {
     const token = this.userService.token;
-    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
 
   fetchUserEvents(): Observable<any> {
+    const userId = this.userService.user?.id;
+
     return this.http.get<any>(
-      `${config.STRAPI}/api/events?populate[0]=user`,
+      `${config.STRAPI}/api/event?filters[user][id][$eq]=${userId}&populate=user`,
       { headers: this.getAuthHeaders() }
     ).pipe(
       tap((response) => {
-        const currentUserId = this.userService.user?.id;
+        console.log('Strapi fetchUserEvents RAW response:', response);
         const events = (response.data || []).map((item: any) => {
-          let userObj = undefined;
-          if (item.user) {
-            userObj = {
-              id: item.user.id,
-              ...item.user
-            };
-          }
+          const userObj = item.user ? {
+            id: item.user.id,
+            username: item.user.username,
+            email: item.user.email
+          } : undefined;
+
           return {
             id: item.id,
             title: item.title,
@@ -40,23 +44,21 @@ export class EventService {
             description: item.description,
             user: userObj
           };
-        }).filter((ev: Event) => ev.user?.id === currentUserId);
+        });
         this.eventsSubject.next(events);
       })
     );
   }
 
 
-
   createEvent(dto: CreateEventDto): Observable<Event> {
     return this.http.post<Event>(
-      `${config.STRAPI}/api/events`,
+      `${config.STRAPI}/api/event`,
       { data: dto },
       { headers: this.getAuthHeaders() }
     ).pipe(
       tap(() => {
         this.refreshEvents();
-        this.fetchUserEvents().subscribe();
       })
     );
   }

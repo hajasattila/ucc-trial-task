@@ -12,10 +12,13 @@
 
   <div class="grid md:grid-cols-2 gap-4">
     <app-event-card
-      *ngFor="let event of events$ | async"
+      *ngFor="let event of (events$ | async)"
       [event]="event"
-      (edit)="openEditModal($event)"
-      (delete)="confirmDelete($event)">
+      (deleted)="onEventCreated()"
+      (edited)="onEventCreated()">
     </app-event-card>
+
+
   </div>
+  <app-modal-wrapper (created)="onEventCreated()"></app-modal-wrapper>
 </div>

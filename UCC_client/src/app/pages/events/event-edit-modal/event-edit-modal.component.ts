@@ -1,41 +1,53 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { EventService } from '../../../services/event-services/event.service';
-import { ModalService } from '../../../components/modal/modal.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from '../../../interfaces/event.model';
+import { EventService } from '../../../services/event-services/event.service';
+import {ModalService} from "../../../components/modal/modal.service";
 
 @Component({
   selector: 'app-event-edit-modal',
   templateUrl: './event-edit-modal.component.html'
 })
-export class EventEditModalComponent implements OnInit {
+export class EventEditModalComponent {
   @Input() event!: Event;
   @Output() closeModal = new EventEmitter<void>();
 
-  form!: FormGroup;
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private eventService: EventService,
     private modalService: ModalService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.form = this.fb.group({
-      description: [this.event?.description || '']
+      title: ['', Validators.required],
+      occurrence: ['', Validators.required],
+      description: ['']
     });
   }
 
-  editEvent(): void {
-    if (this.form.valid && this.event) {
-      this.eventService.updateEvent(this.event.id, this.form.value).subscribe(() => {
-        this.close();
-      });
-    }
+  ngOnInit(): void {
+    this.form.patchValue({
+      title: this.event.title,
+      occurrence: this.event.occurrence,
+      description: this.event.description
+    });
   }
 
-  close(): void {
-    this.modalService.close();
+  save(): void {
+    if (this.form.invalid) return;
+
+    this.eventService.updateEvent(this.event.id, this.form.value).subscribe({
+      next: () => {
+        this.closeModal.emit();
+        this.modalService.close();
+      },
+      error: err => console.error('Hiba mentéskor:', err)
+    });
+  }
+
+  cancel(): void {
     this.closeModal.emit();
+    this.modalService.close();
   }
 }

@@ -15,7 +15,6 @@ export class EventListPageComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private modalService: ModalService,
-    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -26,20 +25,7 @@ export class EventListPageComponent implements OnInit {
   openCreateModal(): void {
     this.modalService.open('event-create');
   }
-
   onEventCreated(): void {
     this.eventService.refreshEvents();
-  }
-
-  openEditModal(event: Event): void {
-    this.modalService.open('event-edit', event);
-  }
-
-  confirmDelete(event: Event): void {
-    if (confirm('Biztosan törlöd ezt az eseményt?')) {
-      this.eventService.deleteEvent(event.id).subscribe(() => {
-        this.eventService.refreshEvents();
-      });
-    }
   }
 }
