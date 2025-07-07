@@ -32,10 +32,7 @@ export default factories.createCoreController('api::chat-message.chat-message', 
 
         if (!userId) return ctx.unauthorized('Felhasználó nem hitelesített');
 
-        const isHumanRequested =
-            messageText.includes('operator') ||
-            messageText.includes('ember') ||
-            messageText.includes('human');
+        const isHumanRequested = messageText.includes('operator') || messageText.includes('ember') || messageText.includes('human');
 
         const createdMessage = await strapi.entityService.create('api::chat-message.chat-message', {
             data: {
@@ -43,33 +40,42 @@ export default factories.createCoreController('api::chat-message.chat-message', 
                 statusEnum: 'answered',
                 isHumanRequested,
                 users_permissions_user: userId,
+                toUser: data.toUser || null
             },
         });
 
         const botReply = getBotReply(messageText);
 
-        const botMessage = await strapi.entityService.create('api::chat-message.chat-message', {
-            data: {
-                message: botReply,
-                statusEnum: 'answered',
-                isHumanRequested: false,
-                users_permissions_user: userId,
-            },
-        });
+        if (botReply) {
+            await strapi.entityService.create('api::chat-message.chat-message', {
+                data: {
+                    message: botReply,
+                    statusEnum: 'answered',
+                    isHumanRequested: false,
+                    users_permissions_user: userId,
+                    toUser: userId
+                },
+            });
+        }
 
-        return ctx.send({ data: [createdMessage, botMessage] });
+        return ctx.send({ data: createdMessage });
     },
 
     async update(ctx) {
         const { id } = ctx.params;
         const { data } = ctx.request.body;
         const userId = ctx.state.user?.id;
+        const isAgent = ctx.state.user?.isAgent === true;
 
         const existing = await strapi.entityService.findOne('api::chat-message.chat-message', id, {
             populate: ['users_permissions_user'],
         }) as any;
 
-        if (!existing || existing.users_permissions_user?.id !== userId) {
+        if (!existing) {
+            return ctx.notFound('Üzenet nem található');
+        }
+
+        if (!isAgent && existing.users_permissions_user?.id !== userId) {
             return ctx.unauthorized('Nincs jogosultság módosítani ezt az üzenetet');
         }
 
@@ -83,16 +89,25 @@ export default factories.createCoreController('api::chat-message.chat-message', 
 
     async find(ctx) {
         const user = ctx.state.user;
+        const isAgent = user?.isAgent === true;
+
+        const filters = isAgent
+            ? { isHumanRequested: true }
+            : {
+                $or: [
+                    { users_permissions_user: user?.id },
+                    { toUser: user?.id }
+                ]
+            };
 
         const messages = await strapi.entityService.findMany('api::chat-message.chat-message', {
-            filters: {
-                users_permissions_user: user?.id,
-            },
-            populate: ['users_permissions_user'],
+            filters,
+            populate: ['users_permissions_user', 'toUser'],
             sort: ['createdAt:asc'],
         });
 
         return ctx.send({ data: messages });
-    },
+    }
+
 
 }));

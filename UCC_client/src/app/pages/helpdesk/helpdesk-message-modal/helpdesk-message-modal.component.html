@@ -15,13 +15,6 @@
       Helpdesk Chat
       <div class="flex items-center gap-3">
         <button
-          (click)="clearChat()"
-          class="text-white text-sm underline hover:text-gray-200"
-          title="Chat törlése"
-        >
-          🗑️ Törlés
-        </button>
-        <button
           (click)="toggleChat()"
           class="text-white text-xl hover:text-red-300 transition"
           aria-label="Bezárás"
@@ -52,6 +45,9 @@
         </div>
         <div *ngIf="msg.isHumanRequested" class="text-xs text-red-500 italic mt-1">
           👤 Emberi segítség kérve
+        </div>
+        <div *ngIf="msg.toUser?.id === userService.user?.id" class="text-xs text-indigo-600 italic mt-1">
+          🤖 Agent válaszolt erre
         </div>
       </div>
       <div #scrollAnchor></div>

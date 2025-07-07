@@ -398,6 +398,10 @@ export interface ApiChatMessageChatMessage extends Struct.CollectionTypeSchema {
     message: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     statusEnum: Schema.Attribute.Enumeration<['pending', 'answered']>;
+    toUser: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

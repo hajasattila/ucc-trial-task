@@ -33,7 +33,7 @@ export class HelpdeskMessageModalComponent implements OnInit, OnDestroy, AfterVi
     'Szeretnék emberrel beszélni'
   ];
 
-  constructor(private chatService: ChatService, private userService: UserService) {}
+  constructor(private chatService: ChatService, protected userService: UserService) {}
 
   ngOnInit() {
     this.userSub = this.userService.userChanges.subscribe(user => {
