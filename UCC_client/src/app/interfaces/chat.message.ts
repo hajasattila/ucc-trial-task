@@ -8,6 +8,8 @@ export interface ChatMessage {
   fromUser?: User;
   assignedAgent?: User;
   status: 'pending' | 'answered';
+  isHumanRequested?: boolean;
+  users_permissions_user?: User;
 }
 
 export interface CreateChatMessageDto {

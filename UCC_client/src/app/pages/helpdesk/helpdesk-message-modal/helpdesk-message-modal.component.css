@@ -1,0 +1,7 @@
+:host {
+  font-family: sans-serif;
+}
+
+input:focus {
+  outline: none;
+}

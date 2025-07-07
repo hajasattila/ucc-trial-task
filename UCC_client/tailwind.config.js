@@ -16,6 +16,8 @@ module.exports = {
         'menu-expand': 'menu-expand 0.5s ease forwards',
         'menu-collapse': 'menu-collapse 0.5s ease forwards',
         bounce: 'bounce 1s infinite',
+        'fade-in-up': 'fadeInUp 0.3s ease-out both'
+
       },
       keyframes: {
         'menu-expand': {
@@ -26,6 +28,10 @@ module.exports = {
           '0%': { maxHeight: '100vh', opacity: '1' },
           '100%': { maxHeight: '0', opacity: '0' },
         },
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' }
+        }
       },
     },
   },

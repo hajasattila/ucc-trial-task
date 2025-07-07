@@ -1,1 +1,75 @@
-<p>helpdesk-message-modal works!</p>
+<div *ngIf="isLoggedIn" class="fixed bottom-8 right-6 z-50">
+  <button
+    (click)="toggleChat()"
+    class="bg-gradient-to-r from-indigo to-purple text-white px-5 py-3 rounded-full shadow-xl transition-transform duration-300"
+    [ngClass]="{ 'animate-bounce': !isOpen }"
+  >
+    💬 Segítség
+  </button>
+
+  <div
+    *ngIf="isOpen"
+    class="mt-4 w-80 bg-white dark:bg-gray800 border border-lightGreen shadow-xl rounded-xl overflow-hidden animate-menu-expand"
+  >
+    <div class="p-4 bg-indigo text-white font-semibold flex justify-between items-center">
+      Helpdesk Chat
+      <div class="flex items-center gap-3">
+        <button
+          (click)="clearChat()"
+          class="text-white text-sm underline hover:text-gray-200"
+          title="Chat törlése"
+        >
+          🗑️ Törlés
+        </button>
+        <button
+          (click)="toggleChat()"
+          class="text-white text-xl hover:text-red-300 transition"
+          aria-label="Bezárás"
+        >
+          &times;
+        </button>
+      </div>
+    </div>
+
+    <div class="px-3 pt-3 flex flex-wrap gap-2">
+      <button
+        *ngFor="let q of suggestedQuestions"
+        (click)="selectSuggested(q)"
+        class="bg-lightGreen text-white text-sm px-3 py-1 rounded-full hover:bg-purple transition"
+      >
+        {{ q }}
+      </button>
+    </div>
+
+    <div class="p-3 max-h-80 overflow-y-auto space-y-3 bg-white dark:bg-gray800 text-sm text-gray800 dark:text-white" #scrollContainer>
+      <div
+        *ngFor="let msg of messages"
+        class="bg-gray-100 dark:bg-gray800 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2"
+      >
+        <div>{{ msg.message }}</div>
+        <div class="text-xs mt-1 text-gray-500 dark:text-gray-400">
+          {{ msg.createdAt | date:'short' }}
+        </div>
+        <div *ngIf="msg.isHumanRequested" class="text-xs text-red-500 italic mt-1">
+          👤 Emberi segítség kérve
+        </div>
+      </div>
+      <div #scrollAnchor></div>
+    </div>
+    <div class="p-3 border-t border-gray-200 dark:border-gray-700 flex items-center bg-gray-50 dark:bg-gray800">
+      <input
+        [(ngModel)]="newMessage"
+        type="text"
+        class="flex-1 rounded-l-md px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none"
+        placeholder="Írj ide..."
+        (keyup.enter)="sendMessage()"
+      />
+      <button
+        (click)="sendMessage()"
+        class="bg-indigo hover:bg-purple text-white px-4 py-2 rounded-r-md transition"
+      >
+        ➤
+      </button>
+    </div>
+  </div>
+</div>
