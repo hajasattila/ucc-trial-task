@@ -13,25 +13,32 @@ export class EventCardComponent {
   @Output() deleted = new EventEmitter<void>();
   @Output() edited = new EventEmitter<void>();
 
+  showDeleteConfirm = false;
+
   constructor(
     private eventService: EventService,
     private modalService: ModalService
   ) {}
 
-  deleteEvent() {
-    if (confirm('Biztosan törlöd ezt az eseményt?')) {
-      this.eventService.deleteEvent(this.event.id).subscribe({
-        next: () => {
-          console.log('Törlés megtörtént, frissítés következik');
-          this.deleted.emit(); // ez már meghívja a frissítést a parentben
-        },
-        error: (err) => console.error('Törlés hiba:', err)
-      });
-    }
-  }
-
-
   openEditModal() {
     this.modalService.open('event-edit', this.event);
+  }
+
+  confirmDelete() {
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+  }
+
+  deleteEventConfirmed() {
+    this.eventService.deleteEvent(this.event.id).subscribe({
+      next: () => {
+        this.deleted.emit();
+        this.showDeleteConfirm = false;
+      },
+      error: (err) => console.error('Törlés hiba:', err)
+    });
   }
 }

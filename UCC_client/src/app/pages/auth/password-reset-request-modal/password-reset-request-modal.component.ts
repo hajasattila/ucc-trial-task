@@ -34,7 +34,6 @@ export class PasswordResetRequestModalComponent {
       next: (resp) => {
         this.success = true;
         this.toastr.success(`Sikeres jelszó-visszaállítási e-mail küldés: ${email}`, 'Email elküldve');
-        console.log('✅ Password reset request sent:', resp);
       },
       error: (err) => {
         this.success = false;

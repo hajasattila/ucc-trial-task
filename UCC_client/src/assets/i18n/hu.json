@@ -19,10 +19,24 @@
     "titleLabel": "Cím",
     "dateLabel": "Időpont",
     "descriptionLabel": "Leírás (opcionális)",
-    "createButton": "Létrehozás"
+    "createButton": "Létrehozás",
+    "occurrence": "Időpont",
+    "description": "Leírás",
+    "errorTitle": "Hiba",
+    "successTitle": "Sikeres mentés",
+    "missingFields": "Hiányzó mezők: {{fields}}",
+    "updateSuccess": "Az eseményt sikeresen elmentettük.",
+    "updateFailed": "Nem sikerült elmenteni az eseményt.",
+    "createSuccess": "Az eseményt sikeresen létrehoztuk.",
+    "createFailed": "Nem sikerült létrehozni az eseményt.",
+    "editTitle": "Esemény szerkesztése",
+    "deleteConfirm": "Biztosan törlöd ezt az eseményt?",
+    "deleteSuccess": "Esemény törölve."
   },
   "common": {
-    "cancel": "Mégse"
+    "cancel": "Mégse",
+    "save": "Mentés",
+    "delete": "Törlés"
   },
   "NAV": {
     "LOGIN": "Bejelentkezés",

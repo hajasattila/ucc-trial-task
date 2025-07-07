@@ -29,40 +29,8 @@ export class ApiService {
         });
     }
 
-    public logout() {
-        this.sCookie.deleteCookie('user_token');
-        this.sUser.removeUser();
-        this.route.navigate(['/home']);
-    }
-
     public stayRequest(): Observable<any> {
         return this.http.get(config.STRAPI + '/api/users/me').pipe();
     }
 
-    //!POST
-    public PostRequest(url: string, data: any) {
-        return this.http.post(config.STRAPI + '/api' + url, data).pipe();
-    }
-    //!PUT
-    public PutRequest(url: string, data: any) {
-        return this.http.put(config.STRAPI + '/api' + url, data).pipe();
-    }
-    //!GET
-    public GetRequest(url: string) {
-        return this.http.get(config.STRAPI + '/api' + url).pipe();
-    }
-    //!DEL
-    public DelRequest(url: string) {
-        return this.http.delete(config.STRAPI + '/api' + url).pipe();
-    }
-
-    //! ERROR
-    public error(err: any) {
-        if (err.error && err.error.error) {
-            return err.error.error.message;
-        } else {
-            this.notify.warning('Ismeretlen hiba lépet fell próbáld újra később!');
-            console.log(err);
-        }
-    }
 }

@@ -30,7 +30,7 @@ export class EventService {
       {headers: this.getAuthHeaders()}
     ).pipe(
       tap((response) => {
-        console.log('Strapi fetchUserEvents RAW response:', response);
+        console.log(response);
         const events = (response.data || []).map((item: any) => {
           const userObj = item.user ? {
             id: item.user.id,
@@ -71,11 +71,12 @@ export class EventService {
       {data: dto},
       {headers: this.getAuthHeaders()}
     ).pipe(
-      tap(() => {
+      tap((res) => {
         this.refreshEvents();
       })
     );
   }
+
 
   deleteEvent(id: number): Observable<any> {
     return this.http.delete<any>(
@@ -83,7 +84,6 @@ export class EventService {
       {headers: this.getAuthHeaders()}
     ).pipe(
       tap((res) => {
-        console.log('Törlés válasz:', res);
         this.refreshEvents();
       })
     );

@@ -1,9 +1,14 @@
 <div class="p-6 max-w-4xl mx-auto">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold">{{ 'events.title' | translate }}</h2>
-    <button (click)="openCreateModal()" class="text-purple px-4 py-2 rounded hover:bg-green-700">
+    <button
+      (click)="openCreateModal()"
+      class="px-5 py-2 rounded-md text-white font-bold transition-colors duration-200 shadow-md
+         bg-lightGreen hover:bg-green"
+    >
       {{ 'events.new' | translate }}
     </button>
+
   </div>
 
   <div *ngIf="(events$ | async)?.length === 0" class="text-gray-500 italic">

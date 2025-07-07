@@ -45,7 +45,6 @@
         </li>
       </ul>
     </div>
-    <!-- BEJELENTKEZETT USER INFO (jobb sarok) -->
     <div class="hidden lg:flex lg:items-center ml-4" *ngIf="isLoggedIn && currentUser">
       <span class="font-semibold text-indigo mr-4 flex flex-col items-end">
         <span>
@@ -108,7 +107,6 @@
             {{ 'NAV.LOGOUT' | translate }}
           </button>
         </li>
-        <!-- Mobilon bejelentkezett user infó -->
         <li *ngIf="isLoggedIn && currentUser" class="mb-4 w-full text-center">
           <span class="font-semibold text-indigo flex flex-col items-center">
             <span>

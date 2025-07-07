@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../services/event-services/event.service';
 import { UserService } from '../../../services/user-services/user.service';
 import { ModalService } from '../../../components/modal/modal.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-event-create-modal',
@@ -17,7 +19,9 @@ export class EventCreateModalComponent implements OnInit {
     private fb: FormBuilder,
     private eventService: EventService,
     private userService: UserService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -29,16 +33,39 @@ export class EventCreateModalComponent implements OnInit {
   }
 
   createEvent(): void {
-    if (this.form.valid && this.userService.user) {
-      const dto = {
-        ...this.form.value,
-        user: this.userService.user.id
-      };
-      this.eventService.createEvent(dto).subscribe((newEvent) => {
+    if (this.form.invalid || !this.userService.user) {
+      const missing: string[] = [];
+      if (this.form.get('title')?.invalid) missing.push(this.translate.instant('events.title'));
+      if (this.form.get('occurrence')?.invalid) missing.push(this.translate.instant('events.occurrence'));
+
+      this.toastr.error(
+        this.translate.instant('events.missingFields', { fields: missing.join(', ') }),
+        this.translate.instant('events.errorTitle')
+      );
+      return;
+    }
+
+    const dto = {
+      ...this.form.value,
+      user: this.userService.user.id
+    };
+
+    this.eventService.createEvent(dto).subscribe({
+      next: (newEvent) => {
+        this.toastr.success(
+          this.translate.instant('events.createSuccess'),
+          this.translate.instant('events.successTitle')
+        );
         this.eventCreated.emit(newEvent);
         this.close();
-      });
-    }
+      },
+      error: () => {
+        this.toastr.error(
+          this.translate.instant('events.createFailed'),
+          this.translate.instant('events.errorTitle')
+        );
+      }
+    });
   }
 
   close(): void {

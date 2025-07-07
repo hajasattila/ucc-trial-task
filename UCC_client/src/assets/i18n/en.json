@@ -19,10 +19,25 @@
     "titleLabel": "Title",
     "dateLabel": "Date",
     "descriptionLabel": "Description (optional)",
-    "createButton": "Create"
+    "createButton": "Create",
+    "occurrence": "Date & Time",
+    "description": "Description",
+    "errorTitle": "Error",
+    "successTitle": "Success",
+    "missingFields": "Missing fields: {{fields}}",
+    "updateSuccess": "The event has been successfully updated.",
+    "updateFailed": "Failed to update the event.",
+    "createSuccess": "The event has been successfully created.",
+    "createFailed": "Failed to create the event.",
+    "editTitle": "Edit Event",
+    "deleteConfirm": "Are you sure you want to delete this event?",
+    "deleteSuccess": "Event deleted."
   },
   "common": {
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete"
+
   },
   "NAV": {
     "LOGIN": "Login",
