@@ -1,15 +1,20 @@
 <ng-container *ngIf="currentModal$ | async as modal">
-  <div
-    class="fixed inset-0 bg-black bg-opacity-50 z-40"
-    (click)="closeModal()"
-  ></div>
-
+  <div class="fixed inset-0 bg-black bg-opacity-50 z-40" (click)="closeModal()"></div>
   <div class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
     <div class="pointer-events-auto" (click)="stopPropagation($event)">
       <ng-container [ngSwitch]="modal">
         <app-password-reset-request-modal *ngSwitchCase="'password-reset-request'"></app-password-reset-request-modal>
-        <app-event-create-modal *ngSwitchCase="'event-create'"></app-event-create-modal>
-        <app-event-edit-modal *ngSwitchCase="'event-edit'"></app-event-edit-modal>
+        <app-event-create-modal
+          *ngSwitchCase="'event-create'"
+          (eventCreated)="onEventCreated($event)">
+        </app-event-create-modal>
+        <ng-container *ngSwitchCase="'event-edit'">
+          <app-event-edit-modal
+            *ngIf="selectedEvent$ | async as event"
+            [event]="event"
+            (closeModal)="closeModal()"
+          ></app-event-edit-modal>
+        </ng-container>
         <app-helpdesk-message-modal *ngSwitchCase="'chat-message'"></app-helpdesk-message-modal>
       </ng-container>
     </div>

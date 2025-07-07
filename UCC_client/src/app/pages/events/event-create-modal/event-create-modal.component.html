@@ -1,5 +1,7 @@
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white rounded p-6 w-full max-w-md shadow-lg">
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+     (click)="close()">
+  <div class="bg-white rounded p-6 w-full max-w-md shadow-lg"
+       (click)="$event.stopPropagation()">
     <h2 class="text-xl font-bold mb-4">{{ 'events.createTitle' | translate }}</h2>
 
     <form (ngSubmit)="createEvent()" [formGroup]="form" class="space-y-4">
@@ -18,9 +20,9 @@
         <textarea formControlName="description" class="w-full border rounded px-3 py-2"></textarea>
       </div>
 
-      <div class="flex justify-end gap-2 mt-4">
+      <div class="flex justify-between flex-row gap-2 mt-4">
         <button type="button" (click)="close()" class="text-gray-500">{{ 'common.cancel' | translate }}</button>
-        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        <button type="submit" class="text-black">
           {{ 'events.createButton' | translate }}
         </button>
       </div>

@@ -7,7 +7,6 @@ import {UserService} from "../../services/user-services/user.service";
 import {ApiService} from "../../services/api-services/api.service";
 import {LanguageService} from "../../services/language-services/language.service";
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -16,9 +15,19 @@ import {LanguageService} from "../../services/language-services/language.service
 export class NavbarComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public currentLang: string = '';
+  public currentUser: any = null;
 
-  constructor(public translate: TranslateService, protected notify: ToastrService, private router: Router, private sUser: UserService, private sApi: ApiService, private languageService: LanguageService) {
-    this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+  constructor(
+    public translate: TranslateService,
+    protected notify: ToastrService,
+    private router: Router,
+    private sUser: UserService,
+    private sApi: ApiService,
+    private languageService: LanguageService
+  ) {
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
       this.activeUrl = event.urlAfterRedirects;
     });
 
@@ -32,9 +41,11 @@ export class NavbarComponent implements OnInit {
 
     this.sUser.userChanges.subscribe((user) => {
       this.isLoggedIn = !!user;
+      this.currentUser = user;
     });
 
     this.isLoggedIn = this.sUser.isLoggednIn();
+    this.currentUser = this.sUser.user;
   }
 
   protected toggleMenu(): void {
@@ -45,7 +56,6 @@ export class NavbarComponent implements OnInit {
     this.sUser.logout();
     this.router.navigate(['/login']);
   }
-
 
   protected switchLang(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;

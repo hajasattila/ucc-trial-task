@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { EventService } from '../../../services/event-services/event.service';
+import { ModalService } from '../../../components/modal/modal.service';
 import { Event } from '../../../interfaces/event.model';
 
 @Component({
@@ -12,21 +14,28 @@ export class EventEditModalComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private eventService: EventService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      description: [this.event.description || '']
+      description: [this.event?.description || '']
     });
   }
 
   editEvent(): void {
-    if (this.form.valid) {
-      // emit data or call service
+    if (this.form.valid && this.event) {
+      this.eventService.updateEvent(this.event.id, this.form.value).subscribe(() => {
+        this.close();
+      });
     }
   }
 
   close(): void {
+    this.modalService.close();
     this.closeModal.emit();
   }
 }

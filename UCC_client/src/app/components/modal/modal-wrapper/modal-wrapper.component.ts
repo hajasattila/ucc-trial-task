@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalService } from '../modal.service';
+import {Component, Output, EventEmitter} from '@angular/core';
+import {ModalService} from '../modal.service';
 
 @Component({
   selector: 'app-modal-wrapper',
@@ -7,6 +7,9 @@ import { ModalService } from '../modal.service';
 })
 export class ModalWrapperComponent {
   currentModal$ = this.modalService.modal$;
+  selectedEvent$ = this.modalService.selectedEvent$;
+
+  @Output() created = new EventEmitter<any>();
 
   constructor(private modalService: ModalService) {}
 
@@ -16,5 +19,10 @@ export class ModalWrapperComponent {
 
   stopPropagation(event: MouseEvent) {
     event.stopPropagation();
+  }
+
+  onEventCreated(event: any) {
+    this.created.emit(event);
+    this.closeModal();
   }
 }

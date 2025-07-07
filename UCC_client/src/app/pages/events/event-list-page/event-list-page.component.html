@@ -1,29 +1,21 @@
 <div class="p-6 max-w-4xl mx-auto">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold">{{ 'events.title' | translate }}</h2>
-    <button (click)="openCreateModal()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+    <button (click)="openCreateModal()" class="text-purple px-4 py-2 rounded hover:bg-green-700">
       {{ 'events.new' | translate }}
     </button>
   </div>
 
-  <div *ngIf="events.length === 0" class="text-gray-500 italic">
+  <div *ngIf="(events$ | async)?.length === 0" class="text-gray-500 italic">
     {{ 'events.empty' | translate }}
   </div>
 
   <div class="grid md:grid-cols-2 gap-4">
-    <div *ngFor="let event of events" class="p-4 border rounded shadow bg-white">
-      <h3 class="text-lg font-semibold">{{ event.title }}</h3>
-      <p class="text-sm text-gray-600">{{ event.occurrence | date: 'short' }}</p>
-      <p class="mt-2">{{ event.description || ('events.noDescription' | translate) }}</p>
-
-      <div class="mt-4 flex gap-2">
-        <button (click)="openEditModal(event)" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-          {{ 'events.edit' | translate }}
-        </button>
-        <button (click)="confirmDelete(event)" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-          {{ 'events.delete' | translate }}
-        </button>
-      </div>
-    </div>
+    <app-event-card
+      *ngFor="let event of events$ | async"
+      [event]="event"
+      (edit)="openEditModal($event)"
+      (delete)="confirmDelete($event)">
+    </app-event-card>
   </div>
 </div>

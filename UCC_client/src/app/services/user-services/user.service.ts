@@ -12,14 +12,14 @@ export class UserService {
   private userSubject = new BehaviorSubject<DecodedToken | null>(null);
   public user$ = this.userSubject.asObservable();
 
-  public user: DecodedToken | null = null;
+  public user: any = null; // ne DecodedToken, hanem any vagy User!
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('token');
-    if (token && this.isTokenValid(token)) {
-      const decoded = this.decodeToken(token);
-      this.user = decoded;
-      this.userSubject.next(decoded);
+    const userStr = localStorage.getItem('user');
+    if (token && userStr && this.isTokenValid(token)) {
+      this.user = JSON.parse(userStr);
+      this.userSubject.next(this.user);
     }
   }
 
@@ -49,19 +49,20 @@ export class UserService {
   }
 
 
-  public loginWithToken(jwt: string): void {
+  public loginWithToken(jwt: string, userObj: any): void {
     localStorage.setItem('token', jwt);
-    const decoded = this.decodeToken(jwt);
-    this.user = decoded;
-    this.userSubject.next(decoded);
+    localStorage.setItem('user', JSON.stringify(userObj));
+    this.user = userObj;
+    this.userSubject.next(userObj);
   }
 
   public logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.user = null;
     this.userSubject.next(null);
-    console.log('👋 Kijelentkezés megtörtént.');
   }
+
 
 
   public get token(): string | null {

@@ -34,7 +34,7 @@ export class LoginPageComponent {
 
       this.userService.login(credentials).subscribe({
         next: (res: { jwt: string; user: any }) => {
-          this.userService.loginWithToken(res.jwt);
+          this.userService.loginWithToken(res.jwt, res.user);
           this.translate.get('login.success').subscribe((msg) =>
             this.toastr.success(msg)
           );
@@ -52,6 +52,7 @@ export class LoginPageComponent {
       console.warn(this.loginForm.errors);
     }
   }
+
 
   openPasswordResetModal() {
     this.modalService.open('password-reset-request');
