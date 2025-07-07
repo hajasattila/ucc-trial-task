@@ -31,7 +31,7 @@ export class PasswordResetRequestModalComponent {
 
     const {email} = this.form.value;
     this.userService.requestPasswordReset(email).subscribe({
-      next: (resp) => {
+      next: () => {
         this.success = true;
         this.toastr.success(`Sikeres jelszó-visszaállítási e-mail küldés: ${email}`, 'Email elküldve');
       },

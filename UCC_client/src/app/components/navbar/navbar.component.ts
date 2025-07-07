@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { UserService } from '../../services/user-services/user.service';
-import { ApiService } from '../../services/api-services/api.service';
 import { LanguageService } from '../../services/language-services/language.service';
 import { User } from '../../interfaces/user.model';
 

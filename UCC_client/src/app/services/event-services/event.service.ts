@@ -71,7 +71,7 @@ export class EventService {
       {data: dto},
       {headers: this.getAuthHeaders()}
     ).pipe(
-      tap((res) => {
+      tap(() => {
         this.refreshEvents();
       })
     );
@@ -83,7 +83,7 @@ export class EventService {
       `${config.STRAPI}/api/event/${id}`,
       {headers: this.getAuthHeaders()}
     ).pipe(
-      tap((res) => {
+      tap(() => {
         this.refreshEvents();
       })
     );

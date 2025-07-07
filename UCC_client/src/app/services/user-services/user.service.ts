@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {jwtDecode} from 'jwt-decode';
-import {DecodedToken} from '../../interfaces/jwt-token.model';
 import {HttpClient} from '@angular/common/http';
 import {config} from '../../../config';
 import { User } from '../../interfaces/user.model';

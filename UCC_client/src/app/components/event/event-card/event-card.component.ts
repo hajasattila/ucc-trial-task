@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Event } from '../../../interfaces/event.model';
 import { EventService } from '../../../services/event-services/event.service';
-import { ModalService } from '../../../components/modal/modal.service';
+import {ModalService} from "../../modal/modal.service";
 
 @Component({
   selector: 'app-event-card',
