@@ -9,6 +9,7 @@ export interface User {
     name: string;
     type: string;
   };
+  isAgent: boolean;
 }
 
 export interface LoginDto {

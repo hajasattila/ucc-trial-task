@@ -4,12 +4,14 @@ import {jwtDecode} from 'jwt-decode';
 import {DecodedToken} from '../../interfaces/jwt-token.model';
 import {HttpClient} from '@angular/common/http';
 import {config} from '../../../config';
+import { User } from '../../interfaces/user.model';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private userSubject = new BehaviorSubject<DecodedToken | null>(null);
+  private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
 
   public user: any = null;
@@ -22,6 +24,8 @@ export class UserService {
       this.userSubject.next(this.user);
     }
   }
+
+
 
   public get userChanges() {
     return this.userSubject.asObservable();
@@ -56,6 +60,7 @@ export class UserService {
     this.userSubject.next(userObj);
   }
 
+
   public logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -83,7 +88,7 @@ export class UserService {
     }
   }
 
-  public getCurrentUser(): DecodedToken | null {
+  public getCurrentUser(): User | null {
     return this.user;
   }
 

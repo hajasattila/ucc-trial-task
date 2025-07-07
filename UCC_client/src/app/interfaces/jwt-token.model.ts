@@ -8,4 +8,5 @@ export interface DecodedToken {
     type: string;
   };
   exp?: number;
+  isAgent: boolean
 }

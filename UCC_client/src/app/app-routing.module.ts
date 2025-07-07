@@ -24,15 +24,7 @@ const routes: Routes = [
   {path: 'reset-password/:code', component: PasswordResetPageComponent},
 
   {path: 'events', component: EventListPageComponent, canActivate: [AuthGuard]},
-  {path: 'helpdesk', component: HelpdeskChatPageComponent, canActivate: [AuthGuard]},
-
-  {
-    path: 'agent',
-    component: HelpdeskAgentPageComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: {role: 'helpdesk_agent'}
-  },
-
+  {path: 'messages', component: HelpdeskAgentPageComponent, canActivate: [AuthGuard, RoleGuard]},
   {path: '**', component: NotfoundComponent}
 ];
 

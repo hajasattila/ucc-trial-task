@@ -37,6 +37,20 @@
             {{ 'NAV.LOGIN' | translate }}
           </a>
         </li>
+        <li *ngIf="isLoggedIn && currentUser?.isAgent" class="mx-2">
+          <a
+            [routerLink]="'messages'"
+            routerLinkActive="active"
+            [ngClass]="{
+      'text-indigo': activeUrl === 'messages',
+      'text-gray800': activeUrl !== 'messages'
+    }"
+            class="text-lg transition duration-300 ease-in-out transform hover:text-lightGreen hover:scale-110"
+          >
+            {{ 'NAV.MESSAGES' | translate }}
+          </a>
+        </li>
+
         <li *ngIf="isLoggedIn" class="mx-2">
           <button (click)="logout()"
                   class="hover:text-lightGreen bg-gradient-to-r from-indigo to-purple text-white font-semibold rounded-full py-2 px-6 transition duration-300 ease-in-out transform hover:bg-blue-700">
@@ -46,14 +60,16 @@
       </ul>
     </div>
     <div class="hidden lg:flex lg:items-center ml-4" *ngIf="isLoggedIn && currentUser">
-      <span class="font-semibold text-indigo mr-4 flex flex-col items-end">
-        <span>
-          <i class="fa fa-user mr-1"></i>
-          {{ currentUser.username }}
-        </span>
-        <span class="text-xs text-gray-600">{{ currentUser.email }}</span>
-      </span>
+  <span class="font-semibold text-indigo mr-4 flex flex-col items-end">
+    <span>
+      <i class="fa fa-user mr-1"></i>
+      {{ currentUser.username }}
+      <span *ngIf="currentUser.isAgent" class="ml-1 text-xs bg-indigo text-white rounded px-2 py-0.5">AGENT</span>
+    </span>
+    <span class="text-xs text-gray-600">{{ currentUser.email }}</span>
+  </span>
     </div>
+
 
     <div class="hidden lg:flex lg:items-center">
       <select [(ngModel)]="currentLang" class="bg-white border-2 border-indigo p-2 rounded mx-5"
@@ -101,6 +117,18 @@
             {{ 'NAV.LOGIN' | translate }}
           </a>
         </li>
+        <li *ngIf="isLoggedIn && currentUser?.isAgent" class="bg-transparent mb-4 w-full text-center">
+          <a
+            (click)="toggleMenu()"
+            [routerLink]="'/messages'"
+            routerLinkActive="active"
+            [ngClass]="activeUrl === '/messages' ? 'text-indigo' : 'hover:text-lightGreen'"
+            class="bg-transparent text-lg block w-full transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            {{ 'NAV.MESSAGES' | translate }}
+          </a>
+        </li>
+
         <li *ngIf="isLoggedIn" class="bg-transparent mb-4 w-full text-center">
           <button (click)="logout()"
                   class="bg-gradient-to-r from-indigo to-purple text-white font-semibold rounded-full py-2 px-6 transition duration-300 ease-in-out transform hover:bg-blue-700">
@@ -108,14 +136,16 @@
           </button>
         </li>
         <li *ngIf="isLoggedIn && currentUser" class="mb-4 w-full text-center">
-          <span class="font-semibold text-indigo flex flex-col items-center">
-            <span>
-              <i class="fa fa-user mr-1"></i>
-              {{ currentUser.username }}
-            </span>
-            <span class="text-xs text-gray-600">{{ currentUser.email }}</span>
-          </span>
+  <span class="font-semibold text-indigo flex flex-col items-center">
+    <span>
+      <i class="fa fa-user mr-1"></i>
+      {{ currentUser.username }}
+      <span *ngIf="currentUser.isAgent" class="ml-1 text-xs bg-indigo text-white rounded px-2 py-0.5">AGENT</span>
+    </span>
+    <span class="text-xs text-gray-600">{{ currentUser.email }}</span>
+  </span>
         </li>
+
         <li class="mt-4">
           <select [(ngModel)]="currentLang" class="bg-white border-2 border-indigo p-2 rounded"
                   (change)="switchLang($event)">

@@ -912,6 +912,7 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     events: Schema.Attribute.Relation<'oneToMany', 'api::event.event'>;
+    isAgent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

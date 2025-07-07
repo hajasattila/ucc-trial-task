@@ -48,7 +48,8 @@
     "LANG_HU": "Hungarian",
     "LANG_EN": "English",
     "HOME": "Home",
-    "EVENTS": "Events"
+    "EVENTS": "Events",
+    "MESSAGES": "Messages"
   },
   "PAGE": {
     "NOT_FOUND_TITLE": "Page Not Found",

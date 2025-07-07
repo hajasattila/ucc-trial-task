@@ -18,10 +18,9 @@ export class RoleGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const expectedRole = route.data['role'];
     const currentUser = this.userService.getCurrentUser();
 
-    if (!currentUser || currentUser.role !== expectedRole) {
+    if (!currentUser || !currentUser.isAgent) {
       this.router.navigate(['/events']);
       return false;
     }
