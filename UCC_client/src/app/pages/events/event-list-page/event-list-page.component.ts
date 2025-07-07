@@ -13,7 +13,7 @@ export class EventListPageComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private modalService: ModalService,
+    protected modalService: ModalService,
   ) {
   }
 

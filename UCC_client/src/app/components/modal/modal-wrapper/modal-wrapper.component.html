@@ -17,6 +17,8 @@
         </ng-container>
         <app-helpdesk-message-modal *ngSwitchCase="'chat-message'"></app-helpdesk-message-modal>
       </ng-container>
+      <app-change-password-modal *ngIf="modal === 'change-password'"></app-change-password-modal>
+
     </div>
   </div>
 </ng-container>

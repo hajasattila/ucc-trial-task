@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
     protected notify: ToastrService,
     private router: Router,
     private sUser: UserService,
-    private sApi: ApiService,
     private languageService: LanguageService
   ) {
     this.router.events.pipe(

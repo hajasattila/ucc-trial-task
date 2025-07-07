@@ -1,14 +1,23 @@
 <div class="p-6 max-w-4xl mx-auto">
   <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold">{{ 'events.title' | translate }}</h2>
-    <button
-      (click)="openCreateModal()"
-      class="px-5 py-2 rounded-md text-white font-bold transition-colors duration-200 shadow-md
-         bg-lightGreen hover:bg-green"
-    >
-      {{ 'events.new' | translate }}
-    </button>
+    <h2 class="text-2xl font-bold text-gray800">{{ 'events.title' | translate }}</h2>
 
+    <div class="flex gap-3">
+      <button
+        (click)="modalService.open('change-password')"
+        class="px-5 py-2 rounded-md text-white font-bold transition-colors duration-200 shadow-md
+               bg-indigo hover:bg-purple"
+      >
+        {{ 'password.changeTitle' | translate }}
+      </button>
+      <button
+        (click)="openCreateModal()"
+        class="px-5 py-2 rounded-md text-white font-bold transition-colors duration-200 shadow-md
+               bg-lightGreen hover:bg-green"
+      >
+        {{ 'events.new' | translate }}
+      </button>
+    </div>
   </div>
 
   <div *ngIf="(events$ | async)?.length === 0" class="text-gray-500 italic">
@@ -22,8 +31,7 @@
       (deleted)="onEventCreated()"
       (edited)="onEventCreated()">
     </app-event-card>
-
-
   </div>
+
   <app-modal-wrapper (created)="onEventCreated()"></app-modal-wrapper>
 </div>

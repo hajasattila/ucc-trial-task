@@ -38,6 +38,9 @@
     "save": "Mentés",
     "delete": "Törlés"
   },
+  "password": {
+    "changeTitle": "Jelszó megváltoztatása"
+  },
   "NAV": {
     "LOGIN": "Bejelentkezés",
     "TASKS": "Feladatok",
@@ -62,5 +65,7 @@
     "mismatch": "A jelszavak nem egyeznek!",
     "success": "Sikeres jelszócsere.",
     "failed": "A jelszó visszaállítás nem sikerült."
-  }
+  },
+  "LANGUAGE_CHANGE_SUCCESS": "Sikeres nyelv váltás"
+
 }

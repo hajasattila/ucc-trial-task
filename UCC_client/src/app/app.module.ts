@@ -32,6 +32,7 @@ import {ToastMessageComponent} from './components/shared/toast-message/toast-mes
 import {RouterModule} from '@angular/router';
 import {LoginPageComponent} from './pages/auth/login-page/login-page.component';
 import {CommonModule} from "@angular/common";
+import { ChangePasswordModalComponent } from './components/change-password-modal/change-password-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalWrapperComponent,
     FormInputComponent,
     ConfirmDeleteModalComponent,
-    ToastMessageComponent
+    ToastMessageComponent,
+    ChangePasswordModalComponent
   ],
   imports: [
     TranslateModule,

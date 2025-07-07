@@ -64,7 +64,6 @@ export class UserService {
   }
 
 
-
   public get token(): string | null {
     return localStorage.getItem('token');
   }
@@ -72,19 +71,6 @@ export class UserService {
   public isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
     return token !== null && this.isTokenValid(token);
-  }
-
-  public hasRole(role: string): boolean {
-    return this.user?.role?.type === role;
-  }
-
-  private decodeToken(token: string): DecodedToken | null {
-    try {
-      return jwtDecode(token);
-    } catch (e) {
-      console.error('❌ Token dekódolási hiba:', e);
-      return null;
-    }
   }
 
   private isTokenValid(token: string): boolean {
@@ -102,16 +88,25 @@ export class UserService {
   }
 
   requestPasswordReset(email: string) {
-    return this.http.post(`${config.STRAPI}/api/auth/forgot-password`, { email });
+    return this.http.post(`${config.STRAPI}/api/auth/forgot-password`, {email});
   }
 
-  resetPassword(code: string, password: string) {
-    return this.http.post(`${config.STRAPI}/api/auth/reset-password`, {
-      code,
-      password,
-      passwordConfirmation: password,
-    });
+  private getAuthHeaders() {
+    const token = this.token;
+    return {
+      Authorization: `Bearer ${token}`
+    };
   }
+
+
+  changePassword(newPassword: string) {
+    return this.http.put(
+      `${config.STRAPI}/api/auth/change-password`,
+      { password: newPassword },
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
 
 
 }
