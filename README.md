@@ -62,7 +62,6 @@ The goal of this project was to build a multi-user event management system where
 - **Postman** – for testing APIs
 - **GitHub** – for version control  
 
-### 5. Sources
 
 ### 5. Sources
 
