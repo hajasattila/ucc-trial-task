@@ -105,4 +105,4 @@ This executes the following concurrently script:
 > concurrently "npm start --prefix UCC_client" "npm run develop --prefix UCC_server"
 
 Demo Video  
-The demo video showcasing the project functionality: 
+The demo video showcasing the project functionality: https://drive.google.com/file/d/1qH1cQco0eETw1rOBDOCoJ4Mv7otAekiZ/view?usp=sharing
